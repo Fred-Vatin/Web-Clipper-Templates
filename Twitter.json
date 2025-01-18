@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Tweet",
+  "behavior": "create",
+  "noteContentFormat": "# Archive\n<!-- avatar | username, id | date-->\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] > div > div > .css-175oi2r.r-18u37iz > .css-175oi2r.r-18kxxzh.r-1wron08.r-onrtq4.r-1awozwy [data-testid=\"Tweet-User-Avatar\"]|markdown|replace:\"/\\n+/g\":\"\"}}\n{{selector:article[tabindex=\"-1\"][data-testid=\"tweet\"] > div > div > .css-175oi2r.r-18u37iz [data-testid=\"User-Name\"] a|first}}\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] > div > div > .css-175oi2r.r-18u37iz [data-testid=\"User-Name\"] a|last|markdown|replace:\"/\\n+/g\":\"\"}}\n[{{selector:article[tabindex=\"-1\"][data-testid=\"tweet\"] a[role=\"link\"] > time?datetime|date:\"YYYY-MM-DD HH:mm\"}}]({{url}})\n<!-- Text | images | video -->\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r.r-1s2bzr4 > [data-testid=\"tweetText\"]:first-of-type|strip_tags:(\"p,strong,em,img\")|strip_attr:(\"alt\")|replace:\"/<img alt=\"(.*?)\">/g\":\"$1\"}}\n\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] > .css-175oi2r.r-eqz5dr.r-16y2uox.r-1wbh5a2 > .css-175oi2r.r-16y2uox.r-1wbh5a2.r-1ny4l3l > [class=\"css-175oi2r\"] > [class=\"css-175oi2r\"] > .css-175oi2r.r-9aw3ui.r-1s2bzr4 > .css-175oi2r.r-9aw3ui [data-testid=\"tweetPhoto\"] img?src|join:\"\\n\"|replace:(\"/^(.+)$/gm\":\"![]($1)\", \"/(.+)/m\":\"$1\\n\")}}\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] > .css-175oi2r.r-eqz5dr.r-16y2uox.r-1wbh5a2 > .css-175oi2r.r-16y2uox.r-1wbh5a2.r-1ny4l3l > [class=\"css-175oi2r\"] > [class=\"css-175oi2r\"] > .css-175oi2r.r-9aw3ui.r-1s2bzr4 > .css-175oi2r.r-9aw3ui [data-testid=\"tweetPhoto\"] video|join:\"\\n\"|strip_attr:(\"poster, type, src\")|replace:\"/(<video)/\":\"$1 style=\\\"width\\: 50%; height\\: 50%\\\" controls\"}}\n<!-- Quoted tweet if exist -->\n<!-- avatar | username, id, date | text | video | images -->\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r[id] > .css-175oi2r[role=\"link\"] > .css-175oi2r > .css-175oi2r.r-eqz5dr.r-jusfrs.r-1s2bzr4 [data-testid=\"Tweet-User-Avatar\"]|markdown|blockquote}}\n{{selector:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r[id] > .css-175oi2r[role=\"link\"] > .css-175oi2r > .css-175oi2r.r-eqz5dr.r-jusfrs.r-1s2bzr4 [data-testid=\"Tweet-User-Avatar\"] + div|replace:(\"/(@)(.+)(·)/\":\" · $1$2 $3 \", \"/(.+)/m\":\"$1\\n\")|blockquote}}\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r[id] > .css-175oi2r[role=\"link\"] .css-175oi2r.r-6gpygo.r-jusfrs > div:not([data-testid=\"tweet-text-show-more-link\"])|strip_tags:(\"p,strong,em,img\")|join:\"\\n\"|strip_attr:(\"alt\")|replace:(\"/<img alt=\"(.*?)\">/g\":\"$1\", \"/(^en réponse à @[a-z]+?$)/mi\":\"*$1*\")|blockquote}}\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r[id] > .css-175oi2r[role=\"link\"] [data-testid=\"tweetPhoto\"] video|join:\"\\n\"|strip_attr:(\"poster, type, src\")|replace:(\"/(<video)/\":\"$1 style=\\\"width\\: 50%; height\\: 50%\\\" controls\", \"/(.+)/m\":\"$1\\n\")|blockquote}}\n{{selectorHtml:article[tabindex=\"-1\"][data-testid=\"tweet\"] .css-175oi2r[id] > .css-175oi2r[role=\"link\"] [data-testid=\"tweetPhoto\"] img?src|join:\"\\n\"|replace:\"/^(.+)$/gm\":\"![]($1)\"|blockquote}}\n\n# Embed\n<!-- Display tweet as it is online -->\n![]({{url}})",
+  "properties": [
+    {
+      "name": "tags",
+      "value": "Twitter/ref, X/ref, Touite/ref",
+      "type": "multitext"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "author",
+      "value": "{{selector:article[tabindex=\\\"-1\\\"][data-testid=\\\"tweet\\\"] [data-testid=\\\"User-Name\\\"] span.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3|first|safe_name}}",
+      "type": "text"
+    },
+    {
+      "name": "userID",
+      "value": "{{url|split:\\\"/\\\"|slice:3,4}}",
+      "type": "text"
+    },
+    {
+      "name": "profile",
+      "value": "https://x.com/{{url|split:\\\"/\\\"|slice:3,4}}",
+      "type": "text"
+    },
+    {
+      "name": "image",
+      "value": "{{selector:img[alt=\\\"Image\\\"]?src|first}}",
+      "type": "text"
+    },
+    {
+      "name": "cssclasses",
+      "value": "table-col-min-width, img-grid",
+      "type": "multitext"
+    },
+    {
+      "name": "published",
+      "value": "{{selector:article[tabindex=\\\"-1\\\"][data-testid=\\\"tweet\\\"] a[role=\\\"link\\\"] > time?datetime}}",
+      "type": "date"
+    },
+    {
+      "name": "created",
+      "value": "{{date}}",
+      "type": "date"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/x\\.com\\/.+?\\/status\\/\\d+$/"
+  ],
+  "noteNameFormat": "Tweet - {{selector:article[tabindex=\"-1\"][data-testid=\"tweet\"] [data-testid=\"User-Name\"] span.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3|first|safe_name}} ({{selector:article[tabindex=\"-1\"][data-testid=\"tweet\"] a[role=\"link\"] > time?datetime|date:\"YYYY-MM-DD HH[h]mm\"}})",
+  "path": "References/Tweets"
+}
