@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "YouTube",
+  "behavior": "create",
+  "noteContentFormat": "# Video URL\n\n[{{title}}]({{meta:property:og:url}}) — [{{schema:@VideoObject:author}}]({{schema:@BreadcrumbList:itemListElement[0].item.@id|replace:\"http\\://\":\"https\\://\"}}) ({{selector:ytd-player .ytp-time-duration|trim}})\n![{{title}}]({{meta:property:og:url}})\n\n# Description\n\n{{schema:@VideoObject:description}}",
+  "properties": [
+    {
+      "name": "title",
+      "value": "{{schema:@VideoObject:name}}",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "value": "Youtube/ref",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{meta:property:og:url}}",
+      "type": "text"
+    },
+    {
+      "name": "channel",
+      "value": "{{schema:@VideoObject:author}}",
+      "type": "text"
+    },
+    {
+      "name": "channelURL",
+      "value": "{{schema:@BreadcrumbList:itemListElement[0].item.@id|replace:\\\"http\\://\\\":\\\"https\\://\\\"}}",
+      "type": "text"
+    },
+    {
+      "name": "videoID",
+      "value": "{{videoId}}",
+      "type": "text"
+    },
+    {
+      "name": "related",
+      "value": "[[Videos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "published",
+      "value": "{{schema:@VideoObject:uploadDate|date:\\\"YYYY-MM-DD\\\"}}",
+      "type": "date"
+    },
+    {
+      "name": "thumbnailUrl",
+      "value": "{{schema:@VideoObject:thumbnailUrl|first}}",
+      "type": "text"
+    },
+    {
+      "name": "duration",
+      "value": "{{schema:@VideoObject:duration|replace:\\\"PT\\\",\\\"\\\",\\\"S\\\",\\\"\\\"}}",
+      "type": "number"
+    },
+    {
+      "name": "durationFormatted",
+      "value": "{{selector:ytd-player .ytp-time-duration|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "cssclasses",
+      "value": "table-col-min-width, wide, img-grid",
+      "type": "multitext"
+    },
+    {
+      "name": "created",
+      "value": "{{time|date:\\\"YYYY-MM-DDTHH:mm:ssZ\\\"}}",
+      "type": "date"
+    }
+  ],
+  "triggers": [
+    "https://www.youtube.com/watch"
+  ],
+  "noteNameFormat": "Youtube - {{schema:@VideoObject:name|safe_name|trim}}",
+  "path": "References/Youtube"
+}
