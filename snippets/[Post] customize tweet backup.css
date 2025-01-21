@@ -1,0 +1,199 @@
+/* [Post] customize tweet backup.css */
+
+[data-callout="tweet"] {
+	--x-img-height: 400px;
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	/* disable all titles */
+	& .callout-title {
+		display: none;
+	}
+
+	& .callout-content {
+		margin: 0 !important;
+	}
+
+	& [data-callout="tweet-poster"] {
+		margin: 0;
+		border: none;
+		background-color: transparent !important;
+
+		& > .callout-content {
+			display: grid;
+			grid-template-columns: 100px 1fr;
+			grid-template-rows: repeat(3, 1fr);
+			column-gap: 1.5rem;
+			row-gap: 0;
+			align-items: center;
+
+			& > p {
+				margin: 0;
+				/* line-height: 12px; */
+			}
+
+			& > p:first-child {
+				grid-row: 1 / 4;
+			}
+
+			& > p:nth-child(2) {
+				grid-row: 1 / 2;
+			}
+			& > p:nth-child(3) {
+				grid-row: 2 / 3;
+			}
+			& > p:nth-child(4) {
+				grid-row: 3 / 4;
+			}
+
+			& > :is(p:nth-child(2), p:nth-child(3), p:nth-child(4)) {
+				grid-column: 2;
+				/* grid-row: 1 / 2; */
+			}
+		}
+	}
+
+	& [data-callout="tweet-content"] {
+		margin: 0;
+		background-color: transparent !important;
+		border: none;
+		padding-block: 0;
+
+		& p:first-child {
+			margin-top: 0;
+		}
+
+		& p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	& [data-callout="tweet-media"] {
+		margin: 0;
+		margin-top: 1rem;
+		background-color: transparent !important;
+		border: none;
+		padding-block: 0;
+
+		& > .callout-content {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: stretch;
+			flex-wrap: wrap;
+
+			& > p {
+				margin: 0;
+				max-width: 100%;
+			}
+
+			&:has(p:nth-child(1) + p:nth-child(2)) {
+				& > p {
+					max-width: 50%;
+
+					& img {
+						width: auto;
+						height: var(--x-img-height);
+						object-fit: cover;
+					}
+				}
+			}
+		}
+	}
+
+	& [data-callout="tweet-quote"] {
+		margin: 0;
+		margin-block: 1rem;
+		margin-inline: 1rem;
+		border: 0;
+		padding: 1rem;
+
+		& [data-callout="tweet-quote-poster"] {
+			margin: 0;
+			border: none;
+			padding: 0;
+			background-color: transparent !important;
+
+			& > .callout-content {
+				display: grid;
+				grid-template-columns: 100px 1fr;
+				grid-template-rows: repeat(3, 1fr);
+				column-gap: 1.5rem;
+				row-gap: 0;
+				align-items: center;
+
+				& > p {
+					margin: 0;
+					/* line-height: 12px; */
+				}
+
+				& > p:first-child {
+					grid-row: 1 / 4;
+				}
+
+				& > p:nth-child(2) {
+					grid-row: 1 / 2;
+				}
+				& > p:nth-child(3) {
+					grid-row: 2 / 3;
+				}
+				& > p:nth-child(4) {
+					grid-row: 3 / 4;
+				}
+
+				& > :is(p:nth-child(2), p:nth-child(3), p:nth-child(4)) {
+					grid-column: 2;
+					/* grid-row: 1 / 2; */
+				}
+			}
+		}
+
+		& [data-callout="tweet-quote-content"] {
+			margin: 0;
+			background-color: transparent !important;
+			border: none;
+			padding: 0;
+
+			& p:first-child {
+				margin-top: 0;
+			}
+
+			& p:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		& [data-callout="tweet-quote-media"] {
+			margin: 0;
+			margin-top: 1rem;
+			background-color: transparent !important;
+			border: none;
+			padding-block: 0;
+
+			& > .callout-content {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: stretch;
+				flex-wrap: wrap;
+
+				& > p {
+					margin: 0;
+					max-width: 100%;
+				}
+
+				&:has(p:nth-child(1) + p:nth-child(2)) {
+					& > p {
+						max-width: 50%;
+
+						& img {
+							width: auto;
+							height: var(--x-img-height);
+							object-fit: cover;
+						}
+					}
+				}
+			}
+		}
+	}
+}
