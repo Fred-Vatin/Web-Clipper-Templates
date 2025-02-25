@@ -2,7 +2,7 @@
   "schemaVersion": "0.1.0",
   "name": "YouTube",
   "behavior": "create",
-  "noteContentFormat": "# Video URL\n\n[{{title}}]({{meta:property:og:url}}) — [{{schema:@VideoObject:author}}]({{schema:@BreadcrumbList:itemListElement[0].item.@id|replace:\"http\\://\":\"https\\://\"}}) ({{selector:ytd-player .ytp-time-duration|trim}})\n![{{title}}]({{meta:property:og:url}})\n\n# Description\n\n{{schema:@VideoObject:description}}",
+  "noteContentFormat": "# Video URL\n\n[{{title}}]({{meta:property:og:url}}) — [{{schema:@VideoObject:author}}](https://www.youtube.com{{selector:#owner a.ytd-video-owner-renderer?href}}) ({{selector:ytd-player .ytp-time-duration|trim}})\n![{{title}}]({{meta:property:og:url}})\n\n# Description\n\n{{selectorHtml:#inline-expander #snippet-text > #attributed-snippet-text > .yt-core-attributed-string--white-space-pre-wrap|strip_tags:(\"p,strong,em,a\")|strip_attr:(\"href\")|replace:(\"/\\/watch\\?v=/gmi\":\"https\\://www.youtube.com/watch?v=\",\"/^(.*\\S.*)$\\n-{3,}/gmi\":\"$1\\n\\n---\\n\",\"/^-{3,}$/gmi\":\"---\\n\",\"/\\n{3,}/gmi\":\"\\n\\n\",\"/\\n/g\":\"\\n<br>\")|markdown|replace:(\"/^\\s{1,}$/gm\":\"\",\"/^\\\\-/gm\":\"-\",\"/^(.+?) {1,}$/gm\":\"$1\")}}\n",
   "properties": [
     {
       "name": "title",
@@ -26,7 +26,7 @@
     },
     {
       "name": "channelURL",
-      "value": "{{schema:@BreadcrumbList:itemListElement[0].item.@id|replace:\\\"http\\://\\\":\\\"https\\://\\\"}}",
+      "value": "https://www.youtube.com{{selector:#owner a.ytd-video-owner-renderer?href}}",
       "type": "text"
     },
     {
