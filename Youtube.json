@@ -73,6 +73,6 @@
   "triggers": [
     "https://www.youtube.com/watch"
   ],
-  "noteNameFormat": "Youtube - {{schema:@VideoObject:name|safe_name|trim}}",
+  "noteNameFormat": "Youtube - {{noteName|trim}}",
   "path": "References/Youtube"
 }
